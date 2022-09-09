@@ -1,7 +1,6 @@
 <?php
 
-$dbconn = pg_connect("host=pg-bd dbname=per user=user password=example")
-    or die('Could not connect: ' . pg_last_error());
+include_once("connection.php");
 
 $query = "SELECT id, nome, usuario FROM usuarios";
 $result = pg_query($query) or die('Query failed: ' . pg_last_error());
