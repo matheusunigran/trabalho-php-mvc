@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         $nome = $_POST["nome"];
         $rgm = $_POST["rgm"];
         $usuario = $_POST["usuario"];
-        $senha = $_POST["senha"];
+        $senha = md5(sha1($_POST["senha"]));
 
         $query = "INSERT INTO usuarios (nome,rgm,usuario,senha,status,tipo,administrador,created,modified) VALUES ('$nome','$rgm','$usuario','$senha','remove_red_eye','person',false,'".date(DATE_ATOM)."','".date(DATE_ATOM)."')";
 
