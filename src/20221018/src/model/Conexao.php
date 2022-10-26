@@ -1,4 +1,5 @@
 <?php
+namespace App\model;
 
 class Conexao{
     private static $conexao;
