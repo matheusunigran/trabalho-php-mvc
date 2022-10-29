@@ -57,9 +57,6 @@ class Pergunta
         if ($this->id != null)
             return false;
  
-       //$query = "INSERT INTO perguntas (pergunta,status,usuario_id,created,modified) VALUES ('" . $this->pergunta . "','" . $this->status . "','" . $this->usuario_id=1 . "','" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
-       //$query = "INSERT INTO perguntas (pergunta,status,created,modified) VALUES ('" . $this->pergunta . "','remove_red_eye,'" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
-
        $query = "INSERT INTO perguntas (pergunta,status, usuario_id, created,modified) VALUES ('" . $this->pergunta . "','" . $this->status . "','" .  $this->usuario_id=1 . "','" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
 
 
@@ -137,22 +134,3 @@ class Pergunta
         return $result;
     }
 }
-
-
-//Instanciar um novo usuario com dados
-//$usuario = new Usuario("Felipe", "46763", "fpp", "12345", "remove_red_eye", "supervisor_account", true);
-//Inserir no banco de dados
-//$usuario->criar();
-
-//Instanciar um novo usuario sem dados
-//$usuario = new Usuario();
-//Pegar as informações do usuario pelo seu ID
-//$usuario->getUsuario(2);
-
-//Setar informações do usuario
-//$usuario->setNome("Felipe");
-//Atualizar informações no banco de dados
-//$usuario->atualizar();
-
-//Deletar o usuario
-//$usuario->deletar();
