@@ -3,23 +3,13 @@ namespace App\model;
 
 require_once "Conexao.php";
 
-class Usuario
+class Pergunta
 {
     
     private $id;
     private $pergunta;
     private $status;
-    private $usuarioid;
-
-   /* private $nome;
-    private $rgm;
-    private $nomeUsuario;
-    private $senha;
-    
-    private $tipo;
-    private $administrador;
-
-    private $enumAdministrador = array(null => null, "t" => true, "f" => false);*/
+    private $usuario_id;
 
     private $conexao;
 
@@ -27,30 +17,14 @@ class Usuario
 
         $pergunta = null,
         $status = null,
-        $usuarioid = null,
+       //$usuario_id = 1,
         
-       /* $nome = null,
-        $rgm = null,
-        $nomeUsuario = null,
-        $senha = null,
-        $status = null,
-        $tipo = null,
-        $administrador = null*/
     ) {
         $this->id = null;
         $this->setPergunta($pergunta);
-        $this->setUsuarioid($usuarioid);
         $this->setStatus($status);
+        //$this->setUsuario_id($usuario_id);
 
-      /*  $this->setNome($nome);
-        $this->setNome($nome);
-        $this->setNome($nome);
-        $this->setRGM($rgm);
-        $this->setNomeUsuario($nomeUsuario);
-        $this->setSenha($senha);
-        $this->setStatus($status);
-        $this->setTipo($tipo);
-        $this->setAdministrador($administrador);*/
 
         $this->conexao = Conexao::getInstancia();
     }
@@ -63,10 +37,10 @@ class Usuario
     {
         $this->pergunta = $pergunta;
     }
-    public function setUsuarioid($usuarioid)
+    /*public function setUsuario_id($usuario_id)
     {
-        $this->usuarioid = $usuarioid;
-    }
+        $this->usuario_id = $usuario_id;
+    }*/
    
 
     public function setStatus($status)
@@ -82,13 +56,14 @@ class Usuario
     {
         if ($this->id != null)
             return false;
+ 
+       //$query = "INSERT INTO perguntas (pergunta,status,usuario_id,created,modified) VALUES ('" . $this->pergunta . "','" . $this->status . "','" . $this->usuario_id=1 . "','" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
+       //$query = "INSERT INTO perguntas (pergunta,status,created,modified) VALUES ('" . $this->pergunta . "','remove_red_eye,'" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
 
-        
-       // $query = "INSERT INTO perguntas (nome,rgm,usuario,senha,status,tipo,administrador,created,modified) VALUES ('" . $this->nome . "','" . $this->rgm . "','" . $this->nomeUsuario . "','" . md5(sha1($this->senha)) . "','remove_red_eye','person',false,'" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
-        $query = "INSERT INTO perguntas (pergunta,usuario_id,status,created,modified) VALUES ('" . $this->pergunta . "','" . $this->usuarioid . "','remove_red_eye','" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
-       // $query = "INSERT INTO perguntas (pergunta ,usuario_id,status,tipo,created,modified) VALUES ('" . $this->pergunta . "','" . $this->usuarioid . "','"."','person',false,'" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
+       $query = "INSERT INTO perguntas (pergunta,status, usuario_id, created,modified) VALUES ('" . $this->pergunta . "','" . $this->status . "','" .  $this->usuario_id=1 . "','" . date(DATE_ATOM) . "','" . date(DATE_ATOM) . "')";
 
-        $result = pg_query($query);
+
+       $result = pg_query($query);
 
         if ($result)
             $this->id = pg_last_oid($result);
@@ -114,7 +89,7 @@ class Usuario
         return $returnValue;
     }
 
-    public function getUsuario($id)
+    public function getPergunta($id)
     {
         $result = $this->ler($id);
         if (empty($result))
@@ -124,16 +99,9 @@ class Usuario
 
         $this->id = $id;
         $this->setPergunta($result["pergunta"]);
-        $this->setUsuarioid($result["usuarioid"]);
         $this->setStatus($result["status"]);
-       /* $this->setNome($result["nome"]);
-        $this->setNome($result["nome"]);
-        $this->setRGM($result["rgm"]);
-        $this->setNomeUsuario($result["usuario"]);
-        $this->setSenha($result["senha"]);
-        $this->setTipo($result["tipo"]);
-        $this->setStatus($result["status"]);
-        $this->setAdministrador($result["administrador"]);*/
+        //$this->setUsuario_id($result["usuario_id"]);
+
 
         return $this;
     }
@@ -145,7 +113,9 @@ class Usuario
         if ($this->id == null)
             return false;
 
-        $query = "UPDATE perguntas SET pergunta= '" . $this->pergunta . "', usuario_id= '" . $this->usuarioid . "', status= '" . $this->status . "', modified= '" . date(DATE_ATOM) . "' WHERE id= '" . $this->id . "'";
+        //$query = "UPDATE perguntas SET pergunta= '" . $this->pergunta . "', usuario_id= '" . $this->usuarioid . "', status= '" . $this->status . "', modified= '" . date(DATE_ATOM) . "' WHERE id= '" . $this->id . "'";
+
+        $query = "UPDATE perguntas SET pergunta= '" . $this->pergunta . "', status= '" . $this->status . "', usuario_id= '" . $this->usuarioid . "', modified= '" . date(DATE_ATOM) . "' WHERE id= '" . $this->id . "'";
 
         $result = pg_query($query);
 

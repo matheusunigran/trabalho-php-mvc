@@ -1,8 +1,8 @@
 <?php
 
-use App\Model\UsuarioController;
+use App\Model\PerguntaController;
 
-    require_once 'controller/UsuarioController.php';
+    require_once 'controller/PerguntaController.php';
 
-    $user = new UsuarioController();
-    $user->exibir();
+    $pergunta = new PerguntaController();
+    $pergunta->exibir();

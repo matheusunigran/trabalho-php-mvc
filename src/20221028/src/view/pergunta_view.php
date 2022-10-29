@@ -1,7 +1,7 @@
 <?php
-$usuarios = $_REQUEST['usuarios'];
+$perguntas = $_REQUEST['perguntas'];
 
-$icons = array("create" => "Editor", "remove_red_eye" => "Somente Leitura", "clear" => "Bloqueado", "supervisor_account" => "Professor", "person" => "Aluno", "verified_user" => "Administrador");
+$icons = array("create" => "Editor", "done" => "Respondida", "remove_red_eye" => "Somente Leitura", "clear" => "Não Respondida", "supervisor_account" => "Professor", "person" => "Aluno", "verified_user" => "Administrador");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,33 +23,32 @@ $icons = array("create" => "Editor", "remove_red_eye" => "Somente Leitura", "cle
 
 <body>
     <!-- Modal Structure -->
-    <div id="modalUsuario" class="modal">
+    <div id="modalPergunta" class="modal">
         <div class="modal-content">
             <h4>Usuário</h4>
-            <h5 id="usuarioModalUsuario"></h5>
+            <h5 id="perguntaModalPergunta"></h5>
             <br><br>
             <div class="row">
-                <form id="formUsuario" method="post" action="controller/InserirController.php">
+                <form id="formPergunta" method="post" action="controller/InserirController.php">
                     <div class="input-field col m4 s12">
                         <input name="pergunta" id="pergunta" type="text" class="validate">
                         <label for="pergunta">Pergunta</label>
                     </div>
+                    <!-- <div class="input-field col m4 s12">
+                        <input name="usuario_id" id="usuario_id" type="text" class="validate">
+                        <label for="usuario_id">Usuário ID</label>
+                    </div> -->
                     <div class="input-field col m4 s12">
-                        <input name="usuarioid" id="usuarioid" type="text" class="validate">
-                        <label for="usuarioid">Usuário ID</label>
-                    </div>
-                    <div class="input-field col m4 s12">
-                        <select id="status" name="status">
+                        <select id="selectStatus" name="statusPergunta">
                             <option value="" disabled selected>Selecione o Status</option>
-                            <option value="create">Editor</option>
-                            <option value="remove_red_eye">Somente Leitura</option>
-                            <option value="clear">Bloqueado</option>
+                            <option value="done">Respondida</option>
+                            <option value="clear">Não Respondida</option>
                         </select>
                         <label>Status do Usuário</label>
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br>
                     <div class="col s12 right-align">
-                        <a class="waves-effect waves-light btn light-blue lighten-1 btnSubmit" id="btnSubmitUsuario" data-form="formUsuario">Enviar</a>
+                        <a class="waves-effect waves-light btn light-blue lighten-1 btnSubmit" id="btnSubmitPergunta" data-form="formPergunta">Enviar</a>
                     </div>
                 </form>
             </div>
@@ -58,30 +57,31 @@ $icons = array("create" => "Editor", "remove_red_eye" => "Somente Leitura", "cle
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="index.php?p=home" class="brand-logo">PeR EngSoft</a>
     </nav>
+    
+    
     <div class="container">
         <div class="section">
             <div class="row">
                 <div class="col s12 m6">
-                    <h4>Usuários</h4>
+                    <h4>Perguntas</h4>
                 </div>
             </div>
         </div>
         <table>
             <tr>
                 <th>ID</th>
-                <th></th>
                 <th>Pergunta</th>
-                <th>Usuário ID</th>
+                <th>ID do Usuário</th>
                 <th>Status</th>
             </tr>
             <?php
-            foreach ($usuarios as $usuario) {
+            foreach ($perguntas as $pergunta) {
             ?>
                 <tr>
-                    <td><?= $usuario["id"] ?></td>
-                    <td><?= $usuario["pergunta"] ?></td>
-                    <td><?= $usuario["usuario_id"] ?></td>
-                    <td><i class="material-icons tooltipped" data-position="bottom" data-tooltip="<?= $icons[$usuario["status"]] ?>"><?= $usuario["status"] ?></i></td>
+                    <td><?= $pergunta["id"] ?></td>
+                    <td><?= $pergunta["pergunta"] ?></td>
+                    <td><?= $pergunta["usuario_id"] ?></td>
+                    <td><i class="material-icons tooltipped" data-position="bottom" data-tooltip="<?= $icons[$pergunta["status"]] ?>"><?= $pergunta["status"] ?></i></td>
                 </tr>
             <?php
             }
@@ -89,10 +89,14 @@ $icons = array("create" => "Editor", "remove_red_eye" => "Somente Leitura", "cle
         </table>
     </div>
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red" id="btn-add-user">
+        <a class="btn-floating btn-large red" id="btn-add-pergunta">
             <i class="large material-icons">add</i>
         </a>
     </div>
+    
+    
+    
+    
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -102,15 +106,16 @@ $icons = array("create" => "Editor", "remove_red_eye" => "Somente Leitura", "cle
             $('.tooltipped').tooltip();
             $('.fixed-action-btn').floatingActionButton();
 
-            $('#btn-add-user').click(() => {
+            $('#btn-add-pergunta').click(() => {
                 $('.modal').modal('open');
             })
 
             $('select').formSelect();
 
-            $('#btnSubmitUsuario').click(()=>{
-                $('#formUsuario').submit();
+            $('#btnSubmitPergunta').click(()=>{
+                $('#formPergunta').submit();
             })
+
         });
     </script>
 

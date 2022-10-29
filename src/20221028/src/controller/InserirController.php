@@ -2,21 +2,13 @@
 
 namespace App\model;
 
-require_once "../model/Usuario.php";
+require_once "../model/Pergunta.php";
 
 
-$usuario = new Usuario();
+$pergunta = new Pergunta();
 
-$usuario->setPergunta($_POST["nome"]);
-$usuario->setUsuarioid($_POST["nome"]);
-$usuario->setStatus($_POST["status"]);
+$pergunta->setPergunta($_POST["pergunta"]);
+//$pergunta->setUsuario_id($_POST["usuario_id"]);
+$pergunta->setStatus($_POST["statusPergunta"]);
 
-
-/*$usuario->setNome($_POST["nome"]);
-$usuario->setRGM($_POST["rgm"]);
-$usuario->setNomeUsuario($_POST["nomeUsuario"]);
-$usuario->setTipo($_POST["tipoUsuario"]);
-$usuario->setAdministrador($_POST["administradorUsuario"] == 1 ? "t" : "f");
-$usuario->setStatus($_POST["statusUsuario"]);*/
-
-$usuario->criar();
+$pergunta->criar();
