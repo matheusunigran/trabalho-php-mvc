@@ -41,14 +41,18 @@ class ImcTest extends TestCase
 
         $imc -> setAltura(1.60);
         $imc -> setPeso(67);
-        $this->assertEquals("I", $imc->getGrau());
+        $this->assertEquals("0", $imc->getGrau());
 
         $imc -> setAltura(1.60);
         $imc -> setPeso(80);
+        $this->assertEquals("I", $imc->getGrau());
+
+        $imc -> setAltura(1.60);
+        $imc -> setPeso(90);
         $this->assertEquals("II", $imc->getGrau());
 
         $imc -> setAltura(1.60);
-        $imc -> setPeso(100);
+        $imc -> setPeso(120);
         $this->assertEquals("III", $imc->getGrau());
     }
     public function testGetClassificacao()
@@ -71,10 +75,14 @@ class ImcTest extends TestCase
 
         $imc -> setAltura(1.60);
         $imc -> setPeso(80);
-        $this->assertEquals("Obesidade", $imc->getClassificacao());
+        $this->assertEquals("Obesidade I", $imc->getClassificacao());
 
         $imc -> setAltura(1.60);
-        $imc -> setPeso(80);
-        $this->assertEquals("Obesidade Extrema", $imc->getClassificacao());
+        $imc -> setPeso(90);
+        $this->assertEquals("Obesidade II", $imc->getClassificacao());
+
+        $imc -> setAltura(1.60);
+        $imc -> setPeso(120);
+        $this->assertEquals("Obesidade III", $imc->getClassificacao());
     }
 }
